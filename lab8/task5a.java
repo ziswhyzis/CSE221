@@ -32,13 +32,10 @@ public class task5a {
     }
 
     public static void main(String[] args) throws IOException {
-        // BufferedReader for efficient input reading
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        // Read number of test cases
         int T = Integer.parseInt(br.readLine());
         
-        // Process each test case
         while (T-- > 0) {
             // Read N (number of tasks) and M (number of people)
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -62,10 +59,10 @@ public class task5a {
             Collections.sort(tasks, (a, b) -> Integer.compare(a.end, b.end));
             
             // STEP 2: Track when each person becomes free
-            // free_person[i] = time when person i finishes their current task
+            // free_person_time[i] = time when person i finishes their current task
             // Initially all people are free at time -1 (before any task starts)
-            int[] free_person = new int[M];
-            Arrays.fill(free_person, -1);
+            int[] free_person_time = new int[M];
+            Arrays.fill(free_person_time, -1);
             
             int count = 0;  // Count of tasks completed
 
@@ -75,32 +72,32 @@ public class task5a {
                 int end = task.end;
 
                 // Find an available person to assign this task
-                int avail = -1;  // Index of available person (-1 = no one available)
+                int available = -1;  // Index of available person (-1 = no one available)
                 int best_time = Integer.MIN_VALUE;  // Latest free time found so far
 
                 // Check all M people to find who can do this task
                 for (int i = 0; i < M; i++) {
                     // CRITICAL CONDITION: Person must finish their previous task BEFORE this one starts
-                    // free_person[i] < start means: person i's last task ended before this task begins
+                    // free_person_time[i] < start means: person i's last task ended before this task begins
                     // This ensures NO OVERLAP (if someone finishes at time 5, new task must start at 6 or later)
-                    if (free_person[i] < start) {
+                    if (free_person_time[i] < start) {
                         // GREEDY CHOICE: Among all available people, pick the one who became free MOST RECENTLY
                         // Why? Keep people with earlier free times available for tasks that might start sooner
                         // Example: If person A is free at time 2 and person B at time 7,
                         //          and current task starts at 10, pick B (keep A available for tasks starting 3-9)
-                        if (free_person[i] > best_time) {
-                            best_time = free_person[i];
-                            avail = i;
+                        if (free_person_time[i] > best_time) {
+                            best_time = free_person_time[i];
+                            available = i;
                         }
                     }
                 }
                 
                 // STEP 4: If we found an available person, assign the task
-                if (avail != -1) {
+                if (available != -1) {
                     count++;  // One more task completed
-                    free_person[avail] = end;  // This person becomes free when this task ends
+                    free_person_time[available] = end;  // This person becomes free when this task ends
                 }
-                // If avail == -1, no one is available, so this task cannot be completed
+                // If available == -1, no one is available, so this task cannot be completed
             }
             
             // Output the maximum number of tasks completed

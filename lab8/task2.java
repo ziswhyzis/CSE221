@@ -13,9 +13,8 @@ public class task2 {
         rank = new int[N + 1];
         for (int i = 0; i <= N; i++) {
             par[i] = i;
+            rank[i] = 0;
         }
-
-        Arrays.fill(rank, 0);
     }
 
     public static int find(int x) {
