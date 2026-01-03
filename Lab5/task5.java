@@ -1,3 +1,5 @@
+package lab5;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,7 +15,8 @@ public class task5 {
         int N = Integer.parseInt(st.nextToken());
         int R = Integer.parseInt(st.nextToken());
 
-        graph = new ArrayList[N + 1];
+        @SuppressWarnings("unchecked")
+        ArrayList<Integer>[] graph = new ArrayList[N + 1];
         for (int i = 1; i <= N; i++)
             graph[i] = new ArrayList<>();
 

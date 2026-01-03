@@ -1,3 +1,5 @@
+package lab1;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -16,11 +18,13 @@ public class task5 {
         if (isSorted(Arr)) {
             System.out.println("YES");
             System.out.println(0);
+            sc.close();
             return;
         }
 
         if (n == 2) {
             System.out.println("NO");
+            sc.close();
             return;
         }
 
@@ -43,6 +47,7 @@ public class task5 {
         } else {
             System.out.println("NO");
         }
+        sc.close();
     }
 
     static boolean isSorted(ArrayList<Integer> arr) {

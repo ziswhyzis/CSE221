@@ -1,3 +1,5 @@
+package lab4;
+
 import java.io.*;
 import java.util.*;
 
@@ -35,6 +37,7 @@ public class task5 {
             for (int i = 0; i < M; i++) v[i] = Integer.parseInt(st.nextToken());
         }
 
+        @SuppressWarnings("unchecked")
         ArrayList<Edge>[] graph = new ArrayList[N + 1];
         for (int i = 1; i <= N; i++) graph[i] = new ArrayList<>();
 
